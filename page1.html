@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Envelope + Letter (Open/Close on Click)</title>
+    <link rel="stylesheet" href="./style1.css">
+ 
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <span class="from-aura">From Aura - adik tercayang</span>
+                <div class="letter">
+                    <div class="text">
+                        <strong>Minal aidin wal faizin!</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Numquam labore omnis minus maiores laboriosam, facere in beatae esse. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>           
+    </div>
+    <a href="page2.html" id="nextButton" style="display: none; margin-top: 20px;">
+        <button>Next ➡️</button>
+    </a>
+    <audio id="bgMusic" src="Minal.mp3"></audio>
+
+    
+    <script>
+        function createEmojis() {
+            for (let i = 0; i < 20; i++) {
+                let emoji = document.createElement('div');
+                emoji.innerHTML = '🙏';
+                emoji.classList.add('emoji');
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Variasi durasi animasi
+                document.body.appendChild(emoji);
+            }
+        }
+        
+        const envelope = document.querySelector('.envelope-wrapper');
+        const bgMusic = document.getElementById('bgMusic');
+        const nextButton = document.getElementById('nextButton'); // Ambil tombol
+        
+        envelope.addEventListener('click', () => {
+            envelope.classList.toggle('flap');
+        
+            if (envelope.classList.contains('flap')) {
+                setTimeout(() => {
+                    createEmojis(); // Buat emoji setelah delay
+                    bgMusic.play(); // Putar lagu setelah surat dibuka
+                    nextButton.style.display = "block"; // Munculkan tombol setelah surat dibuka
+                }, 1000); // Delay 1 detik agar tidak langsung muncul
+            } else {
+                document.querySelectorAll('.emoji').forEach(emoji => emoji.remove()); // Hapus emoji saat surat ditutup
+                bgMusic.pause();
+                bgMusic.currentTime = 0; // Reset lagu kalau surat ditutup
+
+            }
+        });
+        
+    </script>
+</body>
+</html>

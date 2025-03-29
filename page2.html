@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THR Lebaran 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f8f9c3, #ffeb99);
+            overflow: hidden;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: #d4a017;
+            margin-top: 50px;
+        }
+        p {
+            font-size: 20px;
+            color: #555;
+        }
+        .pantun {
+            font-size: 28px;
+            color: #007bff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button {
+            background: #ff9933;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background: #ffb366;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 30px;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+            p, .pantun {
+                font-size: 22px;
+            }
+            button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            .emoji {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ubur-Ubur Ikan Lele</h1>
+    <p class="pantun" onclick="changeText()">Klik di sini untuk pantun spesial 🎤</p>
+    <a href="index.html"><button>Kembali ⬅️</button></a>
+    <script>
+        function changeText() {
+            document.querySelector('.pantun').innerText = "Bagi THR leee... 💰✨";
+        }
+        function createEmojis() {
+            for (let i = 0; i < 20; i++) {
+                let emoji = document.createElement('div');
+                emoji.innerHTML = '💰🎁';
+                emoji.classList.add('emoji');
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.animationDuration = '3s';
+                document.body.appendChild(emoji);
+            }
+        }
+        createEmojis();
+    </script>
+</body>
+</html>

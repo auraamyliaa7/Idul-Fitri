@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metode Pembayaran</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(5, 53, 61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden; /* Agar emoji tidak keluar layar */
+            position: relative;
+        }
+
+        /* Container utama */
+        .main-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Container GIF */
+        .gif_container {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header_text {
+            font-size: 40px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .gif_container img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+        }
+
+        /* Container metode pembayaran */
+        .container {
+            flex: 1;
+            max-width: 500px;
+            background: #e6cfa7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Kartu metode pembayaran */
+        .payment-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5edd1;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .payment-card:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-img {
+            width: 80px;
+            height: 45px;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .copy-btn:hover {
+            color: #007bff;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                padding: 10px;
+            }
+            .main-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .gif_container img {
+                max-width: 250px;
+            }
+            .container {
+                max-width: 100%;
+                padding: 20px;
+            }
+        }
+
+        /* Background emoji */
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.5; /* Tidak transparan */
+            z-index: -1; /* Paling belakang */
+            pointer-events: none; /* Supaya tidak bisa diklik */
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="gif_container">
+            <h1 class="header_text">Hurrayyyy!!</h1>
+            <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Cute animated illustration">
+        </div>
+        <div class="container">
+            <h2>Metode Pembayaran</h2>
+            <div class="payment-card">
+                <img class="icon-img" src="shopee.png" alt="ShopeePay">
+                <div>
+                    <p><strong>ShopeePay</strong></p>
+                    <p>081234567890</p>
+                </div>
+                <button class="copy-btn" onclick="copyText('081234567890')">📋</button>
+            </div>
+            <div class="payment-card">
+                <img class="icon-img" src="dana.png" alt="Dana">
+                <div>
+                    <p><strong>Dana</strong></p>
+                    <p>081234567891</p>
+                </div>
+                <button class="copy-btn" onclick="copyText('081234567891')">📋</button>
+            </div>
+            <div class="payment-card">
+                <img class="icon-img" src="mandiri.png" alt="Mandiri">
+                <div>
+                    <p><strong>Mandiri</strong></p>
+                    <p>123-456-7890</p>
+                </div>
+                <button class="copy-btn" onclick="copyText('123-456-7890')">📋</button>
+            </div>
+            <div class="payment-card">
+                <img class="icon-img" src="bsi.png" alt="BSI">
+                <div>
+                    <p><strong>BSI</strong></p>
+                    <p>987-654-3210</p>
+                </div>
+                <button class="copy-btn" onclick="copyText('987-654-3210')">📋</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Nomor berhasil disalin: " + text);
+        }
+
+        function createEmojis() {
+            for (let i = 0; i < 5; i++) {
+                let emoji = document.createElement('div');
+                emoji.innerHTML = '💸';
+                emoji.classList.add('emoji');
+                document.body.appendChild(emoji);
+
+                // Menentukan posisi awal secara acak di layar
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = Math.random() * -200 + 'px'; // Mulai dari luar layar di atas
+                emoji.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Durasi animasi 3-7 detik
+
+                // Hapus emoji setelah selesai jatuh
+                setTimeout(() => {
+                    emoji.remove();
+                }, 7000);
+            }
+            // Looping emoji setiap 2 detik
+            setTimeout(createEmojis, 2000);
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        window.onload = function () {
+            createEmojis();
+        };
+    </script>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="thr.mp3" type="audio/mpeg">
+    </audio>
+
+</body>
+</html>
